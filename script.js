@@ -7,14 +7,18 @@
 //make loop for 5 times
 
 const selection = ["rock", "paper", "scissors"]
+playerScore = 0
+computerScore = 0
+
+
 
 function getComputerChoice() {
-   const choice = selection[Math.floor(Math.random()*selection.length)];
+   const choice = selection[Math.floor(Math.random() * selection.length)];
    return choice
 }
 
 function getPlayerChoice() {
-   const playerChoice = prompt("Rock, Paper or Scissors?").toLowerCase();
+   let playerChoice = prompt("Rock, Paper or Scissors?").toLowerCase();
    return playerChoice
 }
 
@@ -22,17 +26,39 @@ function playRound(player, computer) {
    if (player == computer) {
       return alert("It's a tie!");
    }
-   else if (player =="rock" && computer == "scissors" || player == "paper" && computer == "rock" || player == "scissors" && computer == "paper") {
+   else if (player == "rock" && computer == "scissors" || player == "paper" && computer == "rock" || player == "scissors" && computer == "paper") {
+      playerScore++;
       return alert(player + " beats " + computer + "! You Win! :) ");
    }
-   else if (computer =="rock" && player == "scissors" || computer == "paper" && player == "rock" || computer == "scissors" && player == "paper") {
+   else if (computer == "rock" && player == "scissors" || computer == "paper" && player == "rock" || computer == "scissors" && player == "paper") {
+      computerScore++;
       return alert(computer + " beats " + player + "! You Lose! :( ");
    }
-   else { 
+   else {
       return alert(player + " is not an option.")
    }
- }
- 
-const player = getPlayerChoice();
-const computer = getComputerChoice();
-console.log(playRound(player, computer));
+}
+function playGame() {
+   for (let round = 0; round < 5; round++) {
+      let player = getPlayerChoice();
+      let computer = getComputerChoice();
+      console.log(player + " vs " + computer);
+      playRound(player, computer);
+      pScore = "Player: " + playerScore;
+      cScore = "Computer: " + computerScore;
+      console.log(pScore, cScore)
+   }
+   score = (pScore + " " + cScore);
+
+   if (playerScore > computerScore) {
+      return alert("You win! Final result: " + score);
+   }
+   else if (computerScore > playerScore) {
+      return alert("Sorry you lose. Try again! Final Result: " + score);
+   }
+   else if (computerScore == playerScore) {
+      return alert("Draw! Final result: " + score);
+   }
+}
+
+console.log(playGame());
